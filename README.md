@@ -1,5 +1,5 @@
 Install dependencies with:
-  npm install -d
+  `npm install -d`
 
-Run the app with
-  npm start
+Run the app with:
+  `npm start`

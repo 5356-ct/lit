@@ -3,3 +3,5 @@ Install dependencies with:
 
 Run the app with:
   `npm start`
+
+Visit the page at http://localhost:3000

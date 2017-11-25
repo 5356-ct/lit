@@ -1,25 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* Submit a phone number. */
-router.get('/phone_number/:phone_number', function(req, res, next) {
-	// Comment out this line:
-  //res.send('respond with a resource');
-
-  // And insert something like this instead:
-  console.log(req.params);
-  console.log(req.params.phone_number);
-  res.json([{
-  	id: 1,
-  	username: "samsepi0l"
-  }, {
-  	id: 2,
-  	username: "D0loresH4ze"
-  }]);
-});
-
+/* Helpers */
 function gen_twilio_code(code, phone_number) {
-
   var accountSid = process.env.ACCOUNTSID;
   var authToken = process.env.AUTHTOKEN;
   console.log('accountSid: ' + accountSid);
@@ -43,8 +26,24 @@ function gen_twilio_code(code, phone_number) {
   } else {
     console.log('really bad');
   }
-
 }
+
+/* Submit a phone number. */
+router.get('/phone_number/:phone_number', function(req, res, next) {
+	// Comment out this line:
+  //res.send('respond with a resource');
+
+  // And insert something like this instead:
+  console.log(req.params);
+  console.log(req.params.phone_number);
+  res.json([{
+  	id: 1,
+  	username: "samsepi0l"
+  }, {
+  	id: 2,
+  	username: "D0loresH4ze"
+  }]);
+});
 
 /* GET users listing. */
 router.get('/phone_number/:phone_number/code', function(req, res, next) {

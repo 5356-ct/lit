@@ -11,6 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import Root from './components/Root'
 import phoneNumber from './components/phoneNumber';
 import enterCode from './components/enterCode';
+import orderForm from './components/orderForm';
 
 
 render(
@@ -19,6 +20,7 @@ render(
             <div className="container">
                 <Route exact path="/" component={phoneNumber} />
                 <Route path="/samplePhoneNumber" component={enterCode} />
+                <Route path="/orderForm" component={orderForm} />
             </div>
         </BrowserRouter>
     </Provider>,

@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Mover = require('../models/movers');
 var Job = require('../models/jobs');
+var Hauler = require('../models/haulers');
+
 
 /* Helpers */
 function gen_twilio_code(code, phone_number) {
@@ -263,14 +265,33 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
       var mover = rows[0];
       if (mover.code + "" === code + "") {
 
-        
+
         var mover_id = mover.id;
 
         Job.getJobByMoverId(mover_id,function(err, rows) {
           if (err) {
             res.json(err);            
           } else {
-            res.json(rows);
+            if (rows.length === 0) {
+              res.json(rows);
+            } else {
+
+              var job = rows[0];
+
+              console.log('hauler_id is true', job.hauler_id === null);
+
+              if (job.hauler_id) {
+                Hauler.getHaulerById(job.hauler_id, function(err, hauler_rows){
+                  if (err) {
+                    res.json(err);
+                  } else {
+                    res.json([hauler_rows[0], rows[0]])
+                  }
+                })
+              } else {
+                res.json(rows);
+              }
+            }            
           }
         })
 

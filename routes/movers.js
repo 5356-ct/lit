@@ -44,7 +44,7 @@ router.get('/phone_number/:phone_number', function(req, res, next) {
     console.log(rows === null);
     if (rows.length === 0) {
       console.log('Phone number not found, inserting')
-      mover = {full_name: 'NULL', phone_number: phone_number}
+      mover = {full_name: null, phone_number: phone_number}
       Mover.addMover(mover,function(err,rows){
         if(err)
         {
@@ -285,7 +285,14 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
                   if (err) {
                     res.json(err);
                   } else {
-                    res.json([hauler_rows[0], rows[0]])
+                    res.json({
+                      hauler: {
+                        "full_name": hauler_rows[0].full_name,
+                        "phone_number": hauler_rows[0].phone_number,
+                        "truck_description":hauler_rows[0].truck_description,
+                      },
+                      job: rows[0]
+                    })
                   }
                 })
               } else {
@@ -295,6 +302,42 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
           }
         })
 
+      } else {
+        res.json([{
+          'error': 'authentication code does not match'
+        }]);
+      }
+    }
+  });
+
+});
+
+/* 
+  GET you can check status with this 
+  always get the last job
+*/
+router.get('/phone_number/:phone_number/code/:code/jobs', function(req, res, next) {
+  var phone_number = req.params.phone_number;
+  var code = req.params.code;
+  // if code and phone number matches
+  // maintain session
+  Mover.getMoverByPhoneNumber(phone_number, function(err, rows){
+
+    if(err) {
+      res.json(err);
+    }
+    else {
+      var mover = rows[0];
+      if (mover.code + "" === code + "") {
+        var mover_id = mover.id;
+
+        Job.getJobsByMoverId(mover_id,function(err, rows) {
+          if (err) {
+            res.json(err);            
+          } else {
+            res.json(rows);           
+          }
+        })
 
       } else {
         res.json([{

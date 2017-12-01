@@ -21,11 +21,26 @@ var Job={
 			],
 			callback);
 	},
+	getAvailableJobs:function(callback) {
+		return db.query("SELECT * FROM jobs WHERE active=true AND hauler_id IS NULL",callback);
+	},
+	getCurrentJob:function(hauler_id,callback) {
+		return db.query("SELECT * FROM jobs WHERE active=true AND hauler_id=?",[hauler_id],callback);
+	},
+	acceptJob:function(hauler_id,job_id,callback) {
+		return db.query("UPDATE jobs set hauler_id=? WHERE id=?",[hauler_id, job_id],callback);
+	},
+	finishJob:function(hauler_id,job_id,callback) {
+		return db.query("UPDATE jobs set active=false, done=true WHERE hauler_id=? AND id=?",[hauler_id, job_id],callback);
+	},
 	disableJobsByMoverId:function(mover_id,callback) {
 		return db.query("UPDATE jobs SET active=false WHERE mover_id=?",[mover_id], callback);
 	},
 	getJobByMoverId:function(mover_id,callback){
 		return db.query("SELECT * FROM jobs WHERE active=true AND mover_id=?",[mover_id],callback);
+	},
+	getJobsByMoverId:function(mover_id,callback){
+		return db.query("SELECT * FROM jobs WHERE mover_id=?",[mover_id],callback);
 	},
 	deleteJob:function(id,callback){
 		return db.query("delete from jobs where Id=?",[id],callback);

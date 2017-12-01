@@ -35,25 +35,54 @@ router.get('/phone_number/:phone_number', function(req, res, next) {
   //res.send('respond with a resource');
   var phone_number = req.params.phone_number;
 
-  Mover.getAllMovers(function(err,rows){
- 
-    if(err){
-      res.json(err);
-    }
+  Mover.getMoverByPhoneNumber(phone_number,function(err,rows){
+    console.log('rows');
+    console.log(rows);
+    console.log(rows === null);
+    if (rows.length === 0) {
+      console.log('Phone number not found, inserting')
+      mover = {full_name: 'NULL', phone_number: phone_number}
+      Mover.addMover(mover,function(err,rows){
+        if(err)
+        {
+          res.json(err);
+        }
+        else{
+          res.json(rows);//or return count for 1 &amp;amp;amp; 0
+        }
+      });
+    } else if (err)
+      {
+        res.json(err);
+      }
     else{
       res.json(rows);
     }
   });
+  // Mover.getAllMovers(function(err,rows){
+ 
+  //   if(err){
+  //     res.json(err);
+  //   }
+  //   else{
+  //     res.json(rows);
+  //   }
+  // });
 });
 
-/* GET users listing. */
+/* GET generate a code and send it to the user's phone given by the phone number. */
 router.get('/phone_number/:phone_number/code', function(req, res, next) {
   var phone_number = req.params.phone_number;
+
   // Twilio Credentials
   // gen_twilio_code(phone_number);
+
   var code = Math.floor(1000 + Math.random() * 9000);
 
-  console.log(code);
+  // check if the phone number exists
+
+  console.log('Generated code', code);
+  
   // And insert something like this instead:
   // console.log(req.params);
   console.log(req.params.phone_number);
@@ -70,7 +99,10 @@ function authenticate(phone_number, code) {
 
 }
 
-/* GET login */
+/* GET 
+check if the phone number matches
+if so, return true
+ */
 router.get('/phone_number/:phone_number/code/:code', function(req, res, next) {
   // if code and phone number matches
   // maintain session

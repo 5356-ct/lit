@@ -24,8 +24,8 @@ var Mover={
 	deleteMover:function(id,callback){
 		return db.query("delete from movers where Id=?",[id],callback);
 	},
-	updateMover:function(id,Move,callback){
-		return db.query("update movers set Title=?,Status=? where Id=?",[mover.full_name, mover.phone_number, mover.code], callback);
+	updateMover:function(id,mover,callback){
+		return db.query("update movers set full_name=?,phone_number=?,code=? where id=?",[mover.full_name, mover.phone_number, mover.code, id], callback);
 	}
 };
 

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Mover = require('../models/movers');
+var Job = require('../models/jobs');
 
 /* Helpers */
 function gen_twilio_code(code, phone_number) {
@@ -76,27 +77,61 @@ router.get('/phone_number/:phone_number/code', function(req, res, next) {
 
   // Twilio Credentials
   // gen_twilio_code(phone_number);
-
   var code = Math.floor(1000 + Math.random() * 9000);
 
   // check if the phone number exists
-
   console.log('Generated code', code);
-  
-  // And insert something like this instead:
-  // console.log(req.params);
-  console.log(req.params.phone_number);
-  res.json([{
-  	id: 1,
-  	username: "samsepi0l"
-  }, {
-  	id: 2,
-  	username: "D0loresH4ze"
-  }]);
+  var mover = {
+    full_name: 'NULL',
+    phone_number: phone_number,
+    code: code
+  }
+  Mover.getMoverByPhoneNumber(phone_number, function(err, rows){
+    if (rows.length === 0) {
+      res.json({'error': 'phone number ' + phone_number + ' not found'});
+    } else {
+      var id = rows[0].id;
+      console.log('Record ID is ' + id);
+      Mover.updateMover(id, mover, function(err, rows){
+        if(err) {
+          res.json(err);
+        }
+        else {
+          res.json({phone_number: phone_number, code: code});//or return count for 1 &amp;amp;amp; 0
+        }
+      })
+    }
+  });
+
+  // // And insert something like this instead:
+  // // console.log(req.params);
+  // console.log(req.params.phone_number);
+  // res.json([{
+  // 	id: 1,
+  // 	username: "samsepi0l"
+  // }, {
+  // 	id: 2,
+  // 	username: "D0loresH4ze"
+  // }]);
 });
 
 function authenticate(phone_number, code) {
-
+  Mover.getMoverByPhoneNumber(phone_number, function(err, rows){
+    if(err) {
+      return false;
+    }
+    else {
+      var mover = rows[0];
+      console.log('mover', mover);
+      console.log('mover.code', mover.code);
+      console.log('code', code);
+      console.log(mover.code + "" === code + "");
+      if (mover.code + "" === code + "") {
+        return true;
+      } 
+    }
+  });
+  return false;
 }
 
 /* GET 
@@ -104,77 +139,149 @@ check if the phone number matches
 if so, return true
  */
 router.get('/phone_number/:phone_number/code/:code', function(req, res, next) {
-  // if code and phone number matches
-  // maintain session
-  // 
   var phone_number = req.params.phone_number;
   var code = req.params.code;
-  if (phone_number === cur_phone_number && code === cur_code) {
-
-  }
-  // // Twilio Credentials
-  // // gen_twilio_code(phone_number);
-  // var code = Math.floor(1000 + Math.random() * 9000);
-
-  // console.log(code);
-  // // And insert something like this instead:
-  // // console.log(req.params);
-  // console.log(req.params.phone_number);
-  // res.json([{
-  //   id: 1,
-  //   username: "samsepi0l"
-  // }, {
-  //   id: 2,
-  //   username: "D0loresH4ze"
-  // }]);
-});
-
-/* GET */
-router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next) {
   // if code and phone number matches
   // maintain session
-  // 
-  var phone_number = req.params.phone_number;
-  var code = req.params.code;
-  if (phone_number === cur_phone_number && code === cur_code) {
-    
-  }
+  Mover.getMoverByPhoneNumber(phone_number, function(err, rows){
+
+    if(err) {
+      res.json(err);
+    }
+    else {
+      var mover = rows[0];
+      // console.log('mover', mover);
+      // console.log('mover.code', mover.code);
+      // console.log('code', code);
+      // console.log(mover.code + "" === code + "");
+      if (mover.code + "" === code + "") {
+
+        res.json([{
+          'success': 'authentication code matches'
+        }]);
+
+
+      } else {
+        res.json([{
+          'error': 'authentication code does not match'
+        }]);
+      }
+    }
+  });
 });
 
-/* GET */
+/* 
+
+  POST
+
+  datetime has to be in the format: 2015-03-25 12:00:00
+
+ */
 router.post('/phone_number/:phone_number/code/:code/job', function(req, res, next) {
-  // if code and phone number matches
-  // maintain session
-  // 
   var phone_number = req.params.phone_number;
   var code = req.params.code;
-  if (phone_number === cur_phone_number && code === cur_code) {
-    
-  }
+  // if code and phone number matches
+  // maintain session
+  console.log(Mover);
+  Mover.getMoverByPhoneNumber(phone_number, function(err, rows){
+
+    if(err) {
+      res.json(err);
+    }
+    else {
+
+      // disable all previous jobs first;
+
+
+      var mover = rows[0];
+      if (mover.code + "" === code + "") {
+
+        console.log(req.body);
+
+        console.log(req);
+        var mover_id = mover.id;
+
+        Job.disableJobsByMoverId(mover_id, function(err, rows){
+
+          if (err) {
+            res.json(err);
+          } else {
+
+            var number_of_rooms = req.body.number_of_rooms;
+            var job_start_time = req.body.job_start_time;
+            var job_end_time = req.body.job_end_time;
+            var max_price = req.body.max_price;
+            var description = req.body.description;
+            var active = true;
+            var done = false;
+
+            var job = {
+              mover_id: mover.id,
+              number_of_rooms: req.body.number_of_rooms,
+              job_start_time: req.body.job_start_time,
+              job_end_time: req.body.job_end_time,
+              max_price: req.body.max_price,
+              description: req.body.description,
+              active: true,
+              done: false
+            }
+            Job.addJob(job,function(err, rows) {
+              if (err) {
+                res.json(err);            
+              } else {
+                res.json([job]);
+              }
+            });
+          }
+          
+        });
+
+      } else {
+        res.json([{
+          'error': 'authentication code does not match'
+        }]);
+      }
+    }
+  });
 });
 
-/* GET */
-router.post('/phone_number/:phone_number/code/:code/job/:job_id', function(req, res, next) {
-  // if code and phone number matches
-  // maintain session
-  // 
+/* 
+  GET you can check status with this 
+  always get the last job
+*/
+router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next) {
   var phone_number = req.params.phone_number;
   var code = req.params.code;
-  if (phone_number === cur_phone_number && code === cur_code) {
-    
-  }
-});
+  // if code and phone number matches
+  // maintain session
+  Mover.getMoverByPhoneNumber(phone_number, function(err, rows){
 
-/* GET */
-router.post('/phone_number/:phone_number/code/:code/job/:job_id/status', function(req, res, next) {
-  // if code and phone number matches
-  // maintain session
-  // 
-  var phone_number = req.params.phone_number;
-  var code = req.params.code;
-  if (phone_number === cur_phone_number && code === cur_code) {
-    
-  }
+    if(err) {
+      res.json(err);
+    }
+    else {
+      var mover = rows[0];
+      if (mover.code + "" === code + "") {
+
+        
+        var mover_id = mover.id;
+
+        Job.getJobByMoverId(mover_id,function(err, rows) {
+          if (err) {
+            res.json(err);            
+          } else {
+            res.json(rows);
+          }
+        })
+
+
+      } else {
+        res.json([{
+          'error': 'authentication code does not match'
+        }]);
+      }
+    }
+  });
 
 });
 

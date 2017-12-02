@@ -9,6 +9,11 @@ npm install -d
 npm start
 ```
 
+#### To Test
+```javascript
+yarn test
+```
+
 #### Database
 
 We use MySQL 

@@ -2,12 +2,37 @@ Circle CI Status: [![CircleCI](https://circleci.com/gh/5356-ct/lit.svg?style=svg
 
 # Documentation
 
+#### Dependencies
+
+* MySQL (you can install this with `brew install mysql`
+* Create database called `lit_development`
+* A good UI tool to administrate mysql is called Sequel Pro. I highly recommend it.
+* To run the app locally, open up `dbconnection.js` in the project root folder
+* Change the credentials to something like this:
+
+    ```
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'lit_development'
+    ```
+
+* Import the seed data via Sequel Pro. The seed file is  `seed/lit_development_2017-12-01.sql`
+
 #### Run app with
 
 ```javascript
 npm install -d
 npm start
 ```
+
+or
+
+```javascript
+yarn install
+yarn start
+```
+
 
 #### To Test
 ```javascript

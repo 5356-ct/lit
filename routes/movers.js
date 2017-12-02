@@ -32,7 +32,14 @@ function gen_twilio_code(code, phone_number) {
   }
 }
 
-/* Submit a phone number. */
+/* 
+
+  GET
+
+  For a mover, given a phone number check if that number is in the database.
+  If the number is not in the database, insert it
+
+*/
 router.get('/phone_number/:phone_number', function(req, res, next) {
 	// Comment out this line:
   //res.send('respond with a resource');
@@ -142,8 +149,10 @@ function authenticate(phone_number, code) {
 }
 
 /* GET 
+
 check if the phone number matches
 if so, return true
+
  */
 router.get('/phone_number/:phone_number/code/:code', function(req, res, next) {
   var phone_number = req.params.phone_number;
@@ -181,7 +190,13 @@ router.get('/phone_number/:phone_number/code/:code', function(req, res, next) {
 
   POST
 
-  datetime has to be in the format: 2015-03-25 12:00:00
+  Create a new job order with the follow parameters
+
+    number_of_rooms: integer
+    job_start_time: datetime, datetime has to be in the format: 2015-03-25 12:00:00
+    job_end_time: datetime, datetime has to be in the format: 2015-03-25 12:00:00
+    max_price: decimal
+    description: string
 
  */
 router.post('/phone_number/:phone_number/code/:code/job', function(req, res, next) {
@@ -253,8 +268,12 @@ router.post('/phone_number/:phone_number/code/:code/job', function(req, res, nex
 });
 
 /* 
-  GET you can check status with this 
-  always get the last job
+  GET
+
+  Fetch the current active job that the mover has requested.
+
+  You can see the status of the job via this endpoint
+
 */
 router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next) {
   var phone_number = req.params.phone_number;
@@ -318,8 +337,9 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
 });
 
 /* 
-  GET you can check status with this 
-  always get the last job
+  GET 
+
+  Fetch all jobs that the mover has requested
 */
 router.get('/phone_number/:phone_number/code/:code/jobs', function(req, res, next) {
   var phone_number = req.params.phone_number;

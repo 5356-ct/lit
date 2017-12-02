@@ -31,7 +31,14 @@ function gen_twilio_code(code, phone_number) {
   }
 }
 
-/* Submit a phone number. */
+/* 
+
+  GET
+
+  For a hauler, given a phone number check if that number is in the database.
+  If the number is not in the database, insert it
+
+*/
 router.get('/phone_number/:phone_number', function(req, res, next) {
   // Comment out this line:
   //res.send('respond with a resource');
@@ -152,7 +159,7 @@ router.get('/phone_number/:phone_number/code/:code', function(req, res, next) {
 
   GET
 
-  A list of available jobs
+  A list of available jobs that the hauler can look at
 
  */
 router.get('/phone_number/:phone_number/code/:code/jobs', function(req, res, next) {

@@ -1,8 +1,8 @@
 var mysql=require('mysql');
 var connection=mysql.createPool({
-	host:ENV['MYSQL_DSN'] || '35.227.62.166' ,
-	user:ENV['MYSQL_USER'] || 'root',
-	password:ENV['MYSQL_PASSWORD'] || 'abcde12345',
+	host:process.env.MYSQL_DSN || '35.227.62.166' ,
+	user:process.env.MYSQL_USER || 'root',
+	password:process.env.MYSQL_PASSWORD || 'abcde12345',
 	database:'lit_development'
 	 
 });

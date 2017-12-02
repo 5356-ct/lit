@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/5356-ct/lit.svg?style=svg)](https://circleci.com/gh/5356-ct/lit)
+Circle CI Status: [![CircleCI](https://circleci.com/gh/5356-ct/lit.svg?style=svg)](https://circleci.com/gh/5356-ct/lit)
 
 # Documentation
 

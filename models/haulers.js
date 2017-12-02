@@ -1,4 +1,5 @@
 var db = require('../dbconnection'); //reference of dbconnection.js
+console.log('db for haulers', db);
 
 var Hauler={
 	getAllHaulers:function(callback){

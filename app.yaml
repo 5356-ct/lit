@@ -1,2 +1,10 @@
 runtime: nodejs
 env: flex
+
+
+env_variables:
+  # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+  # values obtained when configuring your Cloud SQL instance.
+  MYSQL_DSN: mysql:unix_socket=/cloudsql/advstsys-lit:us-east1:advstsys-lit;dbname=lit_development
+  MYSQL_USER: root
+  MYSQL_PASSWORD: abcde12345

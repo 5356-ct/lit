@@ -43,17 +43,22 @@ router.get('/phone_number/:phone_number', function(req, res, next) {
     console.log(rows);
     console.log(rows === null);
     if (rows.length === 0) {
-      console.log('Phone number not found, inserting')
-      mover = {full_name: null, phone_number: phone_number}
-      Mover.addMover(mover,function(err,rows){
-        if(err)
-        {
-          res.json(err);
-        }
-        else{
-          res.json(rows);//or return count for 1 &amp;amp;amp; 0
-        }
-      });
+      console.log('Phone number not found, inserting');
+      if (phone_number.length !== 10) {
+        res.json({'error':'Invalid phone number. Phone number is not 10 digits!'});
+      } else {
+        mover = {full_name: null, phone_number: phone_number}
+        Mover.addMover(mover,function(err,rows){
+          if(err)
+          {
+            res.json(err);
+          }
+          else{
+            res.json(rows);//or return count for 1 &amp;amp;amp; 0
+          }
+        });
+      }
+      
     } else if (err)
       {
         res.json(err);

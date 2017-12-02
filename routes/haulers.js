@@ -40,16 +40,20 @@ router.get('/phone_number/:phone_number', function(req, res, next) {
   Hauler.getHaulerByPhoneNumber(phone_number,function(err,rows){
     if (rows.length === 0) {
       console.log('Phone number not found, inserting')
-      hauler = {full_name: null, phone_number: phone_number}
-      Hauler.addHauler(hauler,function(err,rows){
-        if(err)
-        {
-          res.json(err);
-        }
-        else{
-          res.json(rows);
-        }
-      });
+      if (phone_number.length !== 10) {
+        res.json({'error':'Invalid phone number. Phone number is not 10 digits!'});
+      } else {
+        hauler = {full_name: null, phone_number: phone_number}
+        Hauler.addHauler(hauler,function(err,rows){
+          if(err)
+          {
+            res.json(err);
+          }
+          else{
+            res.json(rows);
+          }
+        });
+      }
     } else if (err)
       {
         res.json(err);

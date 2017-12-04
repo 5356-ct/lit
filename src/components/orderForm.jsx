@@ -2,7 +2,25 @@ import React, {Component} from 'react'
 
 class orderForm extends Component{
 
+    // componentWillMount() {
+    //     grabDataFromAPI()
+    // }
+
+    // grabDataFromAPI() {
+        //  make the api call
+        /*
+        callTheAPIfunction().then({ (response) =>
+            let name = response.name
+            this.setState({
+                name: name
+            })
+        })*/
+    //}
+
     render() {
+        // if you want to render the name now
+        // Then just use this in the field
+        // <li>Name: {this.state.name}</li>
         return(   
             <section id = "map_section">
         

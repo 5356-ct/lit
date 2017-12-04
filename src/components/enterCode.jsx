@@ -1,6 +1,8 @@
 import React from 'react'
 
-const enterCode = () => {  
+const enterCode = () => {
+    this.phoneNumber = window.location.search.split("=")[1];
+
    return(   
         <div className="col-xs-12 col-md-3 input-xs">
             <form onSubmit={evt => {evt.preventDefault()}}>

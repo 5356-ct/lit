@@ -6,11 +6,11 @@
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../src/index.css">
+    <link rel="stylesheet" type="text/css" href="../client/src/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-    <title>Page 5</title>
+    <title>MOVER VIEW</title>
   </head>
   <body>
     <div id="root"></div>
@@ -20,8 +20,8 @@
     <section id = "inner_nav">
       <div class="tab">
         <ul class="tabs">
-          <li><a href="#">MOVING</a></li>
-          <li><a href="#">JUNK HAULING</a></li>
+          <li><a href="#">CREATE</a></li>
+          <li><a href="#">FINISHED JOBS</a></li>
         </ul> <!-- / tabs -->
         <div class="tab_content">
 
@@ -54,8 +54,20 @@
             </div>
           </div> <!-- / tabs_item -->
 
-          <div class="tabs_item">
-            <div> I dont know what goes inside here</div>
+          <div class="tabs_item" id = "mover_tab_item">
+            <div class = "grandparent">
+              <div class ="parent">
+                <div class="wide">
+                  <p>4 Rooms to move</p>
+                  <p>12:30 pm - 8:00 pm</p>
+                  <p>$ 450</p>
+                </div>
+                <div class="narrow_3" onclick="location.href='www.noshin.me';">
+                  <p class ="job_confirm">Confirm</p>
+                </div>
+              </div>
+            </div>
+
           </div> <!-- / tabs_item -->
         </div> <!-- / tab_content -->
       </div> <!-- / tab -->

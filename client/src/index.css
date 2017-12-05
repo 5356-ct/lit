@@ -1,15 +1,158 @@
 body {
-  margin: 0;
+  margin: 10px;
   padding: 0;
+  /*margin-top: 10px;*/
   font-family: sans-serif;
+  background-color: #eff2f8;
 }
 
+.parent {
+  display: flex;
+  padding: 15px;
+}
+.narrow {
+  width: 70%%;
+  background: lightblue;
+}
+.wide {
+  flex: 1;
+}
+
+#mover_tab_item{
+  margin-left: 0px;
+}
+#hauler_tab_item{
+  margin-left: 0px;
+}
+#hauler_tab_item_2{
+  margin-left: 0px;
+}
+
+div.hauler_tab_item {
+    padding: 15px;
+}
+
+div.mover_tab_item {
+    padding: 15px;
+}
+
+.grandparent {
+  margin-top: 15px;
+  border-style: solid;
+  border-color: #dcdada;
+}
+
+.narrow {
+    width: 30%;
+    background-color: #87d3b7;
+    text-align: center;
+}
+
+.narrow_2 {
+    width: 30%;
+    background-color: #ffc107;
+    text-align: center;
+}
+
+.narrow_3 {
+    width: 30%;
+    background-color: #2196f3;
+    text-align: center;
+}
+
+.narrow:active {
+    background-color: cadetblue;
+}
+
+p.job_accept {
+    margin: auto;
+    padding-top: 50px;
+    color: white;
+}
+
+p.job_done{
+    margin: auto;
+    padding-top: 50px;
+    color: white;
+}
+
+p.job_confirm{
+    margin: auto;
+    padding-top: 50px;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#acceptance_message_text{
+  line-height: 150%;
+}
+
+div#message_button {
+    margin-top: 50px;
+}
+
+#party_image{
+  width: 38px;
+}
+
+section#photo_section {
+    overflow: hidden;
+}
+
+img#profile_image {
+    width: 100%;
+}
+
+#photo_section{
+  background: black;
+  width: 100%;
+  height: 200px;
+}
+section#page7_text_section {
+    margin-left: 40px;
+}
+
+div#truck, div#phone, div#money {
+    display: inline-flex;
+}
+
+i.fa {
+    margin-right: 20px;
+  }
+
+
+#acceptance_message {
+  padding-right: 40px;
+}
+
+#heading_image{
+  width: 40px;
+  height: 40px;
+  background-image: url("../public/party.png");
+  margin-right: 10px;
+}
+
+div#heading {
+    display: -webkit-inline-box;
+    margin-left: 40px;
+}
+
+
 #map_section{
-	width: 100%;
-	height: 200px;
+  width: 100%;
+  height: 200px;
   background-color: rgba(3, 169, 244, 0.38);
-  /* margin: auto; */
-  /* width: 300px; */
 }
 
 
@@ -29,7 +172,6 @@ body {
   color: #888;
   -webkit-font-smoothing: antialiased;
 }*/
-
 .tabs {
   display: table;
   position: relative;
@@ -119,11 +261,6 @@ p#example_text {
 
 
 
-
-
-
-
-
 p.form_input {
     display: inline-block;
 }
@@ -135,13 +272,4 @@ input {
 }
 input:focus {
   border-color: #87d3b7;
-}
-
-.input-xs {
-  height: 23px;
-  text-align: center;
-  font-size: 12px;
-  line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
-  border-radius: 3px;
-  background-color: white
 }

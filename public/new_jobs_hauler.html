@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../client/src/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+  <title>Hauler View</title>
+  </head>
+  <body>
+<!--     <div id="root"></div>
+ -->
+
+    <section id = "inner_nav">
+      <div class="tab">
+        <ul class="tabs">
+          <li><a href="#">NEW JOBS</a></li>
+          <li><a href="#">PENDING JOBS</a></li>
+        </ul> <!-- / tabs -->
+        <div class="tab_content">
+
+          <div class="tabs_item" id = "hauler_tab_item">
+            <div class = "grandparent">
+              <div class ="parent">
+                <div class="wide">
+                  <p>4 Rooms to move</p>
+                  <p>12:30 pm - 8:00 pm</p>
+                  <p>$ 450</p>
+                </div>
+
+                <div class="narrow" onclick="location.href='www.noshin.me';">
+                  <p class ="job_accept">Accept</p>
+                </div>
+              </div>
+            </div>
+
+            <div class = "grandparent">
+              <div class ="parent">
+                <div class="wide">
+                  <p>4 Rooms to move</p>
+                  <p>12:30 pm - 8:00 pm</p>
+                  <p>$ 450</p>
+                </div>
+                <div class="narrow" onclick="location.href='www.noshin.me';">
+                  <p class ="job_accept">Accept</p>
+                </div>
+              </div>
+            </div>
+
+            <div class = "grandparent">
+              <div class ="parent">
+                <div class="wide">
+                  <p>4 Rooms to move</p>
+                  <p>12:30 pm - 8:00 pm</p>
+                  <p>$ 450</p>
+                </div>
+                <div class="narrow" onclick="location.href='www.noshin.me';">
+                  <p class ="job_accept">Accept</p>
+                </div>
+              </div>
+            </div>
+
+            <div class = "grandparent">
+              <div class ="parent">
+                <div class="wide">
+                  <p>4 Rooms to move</p>
+                  <p>12:30 pm - 8:00 pm</p>
+                  <p>$ 450</p>
+                </div>
+                <div class="narrow" onclick="location.href='www.noshin.me';">
+                  <p class ="job_accept">Accept</p>
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- / tabs_item -->
+
+
+          <div class="tabs_item" id = "hauler_tab_item_2">
+            <div class = "grandparent">
+              <div class ="parent">
+                <div class="wide">
+                  <p>4 Rooms to move</p>
+                  <p>12:30 pm - 8:00 pm</p>
+                  <p>$ 450</p>
+                </div>
+                <div class="narrow_2" onclick="location.href='www.noshin.me';">
+                  <p class ="job_done">Done</p>
+                </div>
+              </div>
+            </div>
+          </div> <!-- / tabs_item -->
+        </div> <!-- / tab_content -->
+      </div> <!-- / tab -->
+    </section>
+
+
+
+
+    <script type="text/javascript">
+      $(document).ready(function() { 
+
+        (function ($) { 
+          $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
+          
+          $('.tab ul.tabs li a').click(function (g) { 
+            var tab = $(this).closest('.tab'), 
+              index = $(this).closest('li').index();
+            
+            tab.find('ul.tabs > li').removeClass('current');
+            $(this).closest('li').addClass('current');
+            
+            tab.find('.tab_content').find('div.tabs_item').not('div.tabs_item:eq(' + index + ')').slideUp();
+            tab.find('.tab_content').find('div.tabs_item:eq(' + index + ')').slideDown();
+            
+            g.preventDefault();
+          } );
+        })(jQuery);
+      });
+      
+      var maxLength = 120;
+      $('textarea').keyup(function() {
+        var length = $(this).val().length;
+        var length = maxLength-length;
+        $('#chars').text(length);
+      });
+    </script>
+  </body>
+</html>
+
+
+

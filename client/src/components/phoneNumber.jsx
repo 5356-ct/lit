@@ -11,7 +11,7 @@ class phoneNumber extends Component {
     }
   
     goToEnterCode() {
-    //   axios.get(`/api/v1/movers/phone_number/${this.phoneNumber}`)
+      axios.get(`/api/v1/movers/phone_number/${this.phoneNumber}`)
 
       this.props.history.push(`/samplePhoneNumber?phone=${this.phoneNumber}`)
     }

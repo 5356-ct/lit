@@ -139,7 +139,7 @@ i.fa {
 #heading_image{
   width: 40px;
   height: 40px;
-  background-image: url("../public/party.png");
+  background-image: url("/images/party.png");
   margin-right: 10px;
 }
 

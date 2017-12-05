@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
+import axios from 'axios'
 
 class phoneNumber extends Component {
     constructor(props) {
@@ -10,6 +11,8 @@ class phoneNumber extends Component {
     }
   
     goToEnterCode() {
+    //   axios.get(`/api/v1/movers/phone_number/${this.phoneNumber}`)
+
       this.props.history.push(`/samplePhoneNumber?phone=${this.phoneNumber}`)
     }
   

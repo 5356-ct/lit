@@ -21,10 +21,21 @@ Circle CI Status: [![CircleCI](https://circleci.com/gh/5356-ct/lit.svg?style=svg
 
 #### Run app with
 
+In app root directory, run
+```javascript
+npm install -d
+PORT=3001 node ./bin/www
+```
+
+Open a new console/terminal. CD into client/ folder. Run
+
 ```javascript
 npm install -d
 npm start
 ```
+
+Go to localhostl:3000
+
 
 or
 

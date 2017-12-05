@@ -11,8 +11,8 @@ class orderForm extends Component{
         this.finish_by = ''
         this.max_price = ''
         this.textareaChars = ''
-        this.phoneNumber = window.location.search.split("=")[1];
-        this.code = window.location.search.split("=")[2];         
+        this.phoneNumber = window.location.search.split("=")[1].split("?")[0];
+        this.code = window.location.search.split("=")[2].split("/")[0];         
         this.goToGotHauler = this.goToGotHauler.bind(this)
       }
 

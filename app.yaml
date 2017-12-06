@@ -8,3 +8,6 @@ env_variables:
   MYSQL_DSN: mysql:unix_socket=/cloudsql/advstsys-lit:us-east1:advstsys-lit
   MYSQL_USER: root
   MYSQL_PASSWORD: abcde12345
+
+beta_settings:
+  cloud_sql_instances: advstsys-lit:us-east1:advstsys-lit

@@ -12,6 +12,8 @@ import Root from './components/Root'
 import phoneNumber from './components/phoneNumber';
 import enterCode from './components/enterCode';
 import orderForm from './components/orderForm';
+import confirmMover from './components/confirmMover';
+import newJobsHauler from './components/newJobsHauler';
 
 
 render(
@@ -21,6 +23,8 @@ render(
                 <Route exact path="/" component={phoneNumber} />
                 <Route path="/samplePhoneNumber" component={enterCode} />
                 <Route path="/orderForm" component={orderForm} />
+                <Route path="/confirmMover" component={confirmMover} />
+                <Route path="/newJobsHauler" component={newJobsHauler} />
             </div>
         </BrowserRouter>
     </Provider>,

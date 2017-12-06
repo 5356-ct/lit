@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom';
 
 class orderForm extends Component{
     
@@ -16,21 +17,23 @@ class orderForm extends Component{
         this.goToGotHauler = this.goToGotHauler.bind(this)
       }
 
-    componentDidMount(){
-        axios.post(`/api/v1/movers/phone_number/${this.phoneNumber}/code/${this.code}/job`)  
-            .then( response =>
-                this.setState({
-                    no_room : response.number_of_rooms,
-                    start_time : response.job_start_time,
-                    finish_by : response.job_end_time,
-                    max_price : response.max_price,
-                    // textareaChars: description                
-                })
-            )    
-    }
-
     goToGotHauler() {  
-        this.props.history.push(`/orderForm?phone=${this.phoneNumber}/`)
+        axios.post(`/api/v1/movers/phone_number/${this.phoneNumber}/code/${this.code}/job`,{
+            number_of_rooms: this.no_room,
+            job_start_time: this.start_time,
+            job_end_time: this.finish_by,
+            max_price: this.max_price,
+            description: this.textareaChars
+        })  
+            .then( response => {
+                console.log(response)            
+            })
+            .catch(function(error) {
+                console.log(error)
+            })     
+        
+        
+        this.props.history.push(`/confirmMover?phone=${this.phoneNumber}?code=${this.code}/`)
     }
 
     // componentWillMount() {
@@ -49,7 +52,7 @@ class orderForm extends Component{
     //}
 
     render() {
-        // if you want to render the name now
+        // to render the name now
         // Then just use this in the field
         // <li>Name: {this.state.name}</li>
         return(   
@@ -59,7 +62,7 @@ class orderForm extends Component{
                 <div className="tab">
                     <ul className="tabs">
                     <li><a href="#">MOVING</a></li>
-                    <li><a href="#">JUNK HAULING</a></li>
+                    <li><Link to="/newJobsHauler">JUNK HAULING</Link></li>
                     </ul> 
                     <div className="tab_content">
         
@@ -67,7 +70,7 @@ class orderForm extends Component{
                         <form 
                         onSubmit={evt => {
                             evt.preventDefault()
-                            this.no_room = ''
+                            this.no_room = evt.target.no_room.value
                             this.start_time = evt.target.start_time.value
                             this.finish_by = evt.target.finish_by.value
                             this.max_price = evt.target.max_price.value
@@ -77,19 +80,19 @@ class orderForm extends Component{
                             <div>
                             <div id ="rooms_div">
                                 <p className = "form_input">Number of Rooms to Move:</p>
-                                <input placeholder="" id = "no_room" name = "no_room" type="text"/>
+                                <input placeholder="" id = "no_room" name = "no_room" type="number"/>
                             </div>
                             <div id ="job_start">
                                 <p className = "form_input">Job Start Time:</p>
-                                <input placeholder="" id = "start_time" name = "start_time" type="text"/>
+                                <input placeholder="" id = "start_time" name = "start_time" type="datetime"/>
                             </div>
                             <div id ="job_finish">
                                 <p className = "form_input">Finish BY:</p>
-                                <input placeholder="" id = "finish_by" name = "finish_by" type="text"/>
+                                <input placeholder="" id = "finish_by" name = "finish_by" type="datetime"/>
                             </div>
                             <div id ="max_price">
                                 <p className = "form_input">Max Price:</p>
-                                <input placeholder="" id = "max_price" name = "max_price" type="text"/>
+                                <input placeholder="" id = "max_price" name = "max_price" type="number"/>
                             </div>
             
                             <p>Describe your Job</p>
@@ -99,7 +102,7 @@ class orderForm extends Component{
                             </div>
 
                             <div id = "send_button">
-                            <button className="button button5" type="submit">Send</button>
+                                <button className="button button5" type="submit">Send</button>
                             </div>
                         </form>
                     </div> 

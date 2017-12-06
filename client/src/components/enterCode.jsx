@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import orderForm from './orderForm'
 
 class enterCode extends Component {
     constructor(props) {
         super(props)
         
-        this.code = ''
         this.phoneNumber = window.location.search.split("=")[1];        
         this.goToOrderForm = this.goToOrderForm.bind(this)
       }
     
       componentDidMount(){
+        this.props.isAMover ?
         axios.get(`/api/v1/movers/phone_number/${this.phoneNumber}/code`)  
-            // .then( response =>
-            //     this.setState({
-            //         code: response.code
-            //     })
-            // )    
+        : 
+        axios.get(`/api/v1/haulers/phone_number/${this.phoneNumber}/code`)     
       }
 
-      goToOrderForm() {  
+      goToOrderForm() {
+        {<orderForm isAMover={this.props.isAMover} />} 
+        this.props.isAMover ?
         this.props.history.push(`/orderForm?phone=${this.phoneNumber}?code=${this.code}/`)
+        :
+        this.props.history.push(`/newJobsHauler?phone=${this.phoneNumber}?code=${this.code}/`)
       }
 
     render(){

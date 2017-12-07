@@ -49,7 +49,7 @@ class currentJob extends Component{
             <div id = "inner_nav">
             <div className="tab">
               <ul className="tabs">
-                <li><a href="#">NEW JOBS</a></li>
+                <li><Link to="">NEW JOBS</Link></li>
                 <li><Link to="">CURRENT JOB</Link></li>
               </ul> 
               <div className="tab_content">

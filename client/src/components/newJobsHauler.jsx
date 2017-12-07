@@ -80,9 +80,9 @@ class newJobsHauler extends Component{
                   <div className = "grandparent">
                     <div className ="parent">
                       <div className="wide">
-                        <p>4 Rooms to move</p>
-                        <p>12:30 pm - 8:00 pm</p>
-                        <p>$ 450</p>
+                        <p>3 Room to move</p>
+                        <p>12:45 pm - 3:00 pm</p>
+                        <p>$ 200</p>
                       </div>
                       <div className="narrow" onClick={ evt => this.acceptedJob(evt)}>
                         <p className ="job_accept">Accept</p>
@@ -93,9 +93,9 @@ class newJobsHauler extends Component{
                   <div className = "grandparent">
                     <div className ="parent">
                       <div className="wide">
-                        <p>4 Rooms to move</p>
-                        <p>12:30 pm - 8:00 pm</p>
-                        <p>$ 450</p>
+                        <p>5 Rooms to move</p>
+                        <p>11:30 pm - 5:00 am</p>
+                        <p>$ 700</p>
                       </div>
                       <div className="narrow" onClick={ evt => this.acceptedJob(evt)}>
                         <p className ="job_accept">Accept</p>
@@ -106,9 +106,9 @@ class newJobsHauler extends Component{
                   <div className = "grandparent">
                     <div className ="parent">
                       <div className="wide">
-                        <p>4 Rooms to move</p>
-                        <p>12:30 pm - 8:00 pm</p>
-                        <p>$ 450</p>
+                        <p>7 Rooms to move</p>
+                        <p>1:30 pm - 5:00 pm</p>
+                        <p>$ 300</p>
                       </div>
                       <div className="narrow" onClick={ evt => this.acceptedJob(evt)}>
                         <p className ="job_accept">Accept</p>
@@ -123,7 +123,7 @@ class newJobsHauler extends Component{
                   <div className = "grandparent">
                     <div className ="parent">
                       <div className="wide">
-                        <p>4 Rooms to move</p>
+                        <p>7 Rooms to move</p>
                         <p>12:30 pm - 8:00 pm</p>
                         <p>$ 450</p>
                       </div>

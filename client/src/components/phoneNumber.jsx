@@ -34,8 +34,15 @@ class phoneNumber extends Component {
     goToEnterCode() {
       this.state.isAMover ?
       axios.get(`/api/v1/movers/phone_number/${this.state.phoneNumber}`)
+        .catch(function (error) {
+            console.log(error);
+        })
       : 
       axios.get(`/api/v1/haulers/phone_number/${this.state.phoneNumber}`)
+        .catch(function (error) {
+            console.log(error);
+        })
+    
       
       this.props.history.push(`/samplePhoneNumber?phone=${this.state.phoneNumber}?isAMover=${this.state.isAMover}`)
     }

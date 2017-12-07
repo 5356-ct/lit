@@ -44,6 +44,18 @@ jobs:
       - run:
           name: Install some stuff
           command: echo "deploy deploy deploy!"
+      - run: curl -o $HOME/google_appengine_1.9.30.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip
+      - run: unzip -q -d $HOME $HOME/google_appengine_1.9.30.zip
+      # Retrieve our secrets from the CircleCI environment
+      - run: echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
+      - run: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+      - run: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/client-secret.json
+      # - sed  s/YOUR-API-KEY/$API_KEY/ api_key.py.sample > api_key.py
+      # vendor our dependencies
+      - run: mkdir -p lib
+      - run: sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
+      - run: sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run: sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
 
 workflows:
   version: 2

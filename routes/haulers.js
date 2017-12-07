@@ -19,7 +19,7 @@ function gen_twilio_code(code, phone_number) {
       .create({
         to: phone_number,
         from: '+14247048254',
-        body: "" + code,
+        body: "" + code
       })
       .then(function (message) {
         // console.log(message);
@@ -57,7 +57,7 @@ router.get('/phone_number/:phone_number', function(req, res, next) {
             res.json(err);
           }
           else{
-            res.json(rows);
+            res.json({success:'true',type:'hauler'});
           }
         });
       }
@@ -66,7 +66,7 @@ router.get('/phone_number/:phone_number', function(req, res, next) {
         res.json(err);
       }
     else{
-      res.json(rows);
+      res.json({success:'true',type:'hauler'});
     }
   });
 });
@@ -97,7 +97,7 @@ router.get('/phone_number/:phone_number/code', function(req, res, next) {
           res.json(err);
         }
         else {
-          res.json({phone_number: phone_number, code: code});//or return count for 1 &amp;amp;amp; 0
+          res.json({phone_number: phone_number, code: code, type:'hauler'});//or return count for 1 &amp;amp;amp; 0
         }
       })
     }

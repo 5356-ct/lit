@@ -6,10 +6,10 @@ class history extends Component{
     constructor(props) {
         super(props)
         
-        this.no_room = ''
-        this.start_time = ''
-        this.finish_by = ''
-        this.max_price = ''
+        this.no_room = 2
+        this.start_time = '4:30 pm'
+        this.finish_by = '8:00 pm'
+        this.max_price = 75
         this.textareaChars = ''
         this.phoneNumber = window.location.search.split("=")[1].split("?")[0];
         this.code = window.location.search.split("=")[2].split("/")[0];         
@@ -44,9 +44,9 @@ class history extends Component{
                   <div className = "grandparent">
                     <div className ="parent">
                       <div className="wide">
-                        <p>Moved 2 Rooms</p>
+                        <p>Moved {this.no_room} Rooms</p>
                         <p>4:30 pm - 8:00 pm</p>
-                        <p>$ 75</p>
+                        <p>$ {this.max_price}</p>
                       </div>
       
                       <div className="narrow">

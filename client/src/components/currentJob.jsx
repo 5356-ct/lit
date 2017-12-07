@@ -7,40 +7,23 @@ class currentJob extends Component{
     constructor(props) {
         super(props)
         
-        this.no_room = ''
-        this.start_time = ''
-        this.finish_by = ''
-        this.max_price = ''
-        this.textareaChars = ''        
-        this.goToGotHauler = this.goToGotHauler.bind(this)
+        this.no_room = 4
+        this.start_time = '12:30 pm'
+        this.finish_by = '8:00 pm'
+        this.max_price = '450'
+        this.textareaChars = ''
+        this.ID = window.location.search.split("=")[3].slice(0,-1)
+        this.phoneNumber = window.location.search.split("=")[1].split("?")[0] 
+        this.code = window.location.search.split("=")[2].split("?")[0]        
 
         this.state ={
             showMe: true
         }
       }
 
-    goToGotHauler() {  
-        axios.post(`/api/v1/movers/phone_number/${this.phoneNumber}/code/${this.code}/job`,{
-            number_of_rooms: this.no_room,
-            job_start_time: this.start_time,
-            job_end_time: this.finish_by,
-            max_price: this.max_price,
-            description: this.textareaChars
-        })  
-            .then( response => {
-                console.log(response)            
-            })
-            .catch(function(error) {
-                console.log(error)
-            })     
-        
-        
-        this.props.history.push(`/confirmMover?phone=${this.phoneNumber}?code=${this.code}/`)
-    }
-
     acceptedJob(){
         var ID = Math.floor(Math.random()*50)
-        axios.get(`/api/v1/movers/phone_number/${this.phoneNumber}/code/${this.code}/job/${ID}`)
+        axios.get(`/api/v1/movers/phone_number/${this.phoneNumber}/code/${this.code}/job/${ID}/finish`)
         this.setState({showMe: false})
     }
 
@@ -58,18 +41,18 @@ class currentJob extends Component{
                   <div className = "grandparent">
                     <div className ="parent">
                       <div className="wide">
-                        <p>4 Rooms to move</p>
-                        <p>12:30 pm - 8:00 pm</p>
-                        <p>$ 450</p>
+                        <p>{this.no_room} Rooms to move</p>
+                        <p>{this.start_time} - {this.finish_by}</p>
+                        <p>$ {this.max_price}</p>
                       </div>
                         {
                             this.state.showMe ?
                             <div className="narrow" onClick={ evt => this.acceptedJob(evt)}>
-                                <p className ="job_accept">Accept</p>
+                                <p className ="job_accept">Finished Job?</p>
                             </div>
                             :
                             <div className="narrow">
-                                <p className ="job_accept">Accepted Job!</p>
+                                <p className ="job_accept">Finished Job! </p>
                             </div>
                         }
                     </div>

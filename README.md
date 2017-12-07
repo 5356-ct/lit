@@ -2,6 +2,15 @@ Circle CI Status: [![CircleCI](https://circleci.com/gh/5356-ct/lit.svg?style=svg
 
 # Documentation
 
+#### Documentation Generation
+
+In project's root directory, run
+
+```
+yarn apidoc
+yarn opendocs
+```
+
 #### Dependencies
 
 * MySQL (you can install this with `brew install mysql`

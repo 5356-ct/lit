@@ -55,9 +55,9 @@ jobs:
       - run: mkdir -p lib
       - run: curl -o $HOME/google-cloud-sdk.tgz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz
       - run: tar -zxvf $HOME/google-cloud-sdk.tgz
-      - run: $HOME/google-cloud-sdk/bin/gcloud --quiet components update
-      - run: $HOME/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-      - run: $HOME/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
+      - run: google-cloud-sdk/bin/gcloud --quiet components update
+      - run: google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run: google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
 
 workflows:
   version: 2

@@ -61,8 +61,8 @@ jobs:
       - run: yarn install
       - run: git clone https://github.com/5356-ct/lit.git
       - run: pwd
-      - run: ls $HOME/lit/
-      - run: google-cloud-sdk/bin/gcloud app deploy $HOME/lit/app.yaml
+      - run: ls $HOME/repo/lit/
+      - run: google-cloud-sdk/bin/gcloud app deploy $HOME/repo/lit/app.yaml
 
 
 workflows:

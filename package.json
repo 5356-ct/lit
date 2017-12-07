@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "start": "PORT=3001 node ./bin/www",
     "test": "mocha --timeout 10000",
     "apidoc": "apidoc -i routes/ -o apidoc/",
     "opendocs": "cd apidoc && open index.html"
@@ -16,6 +17,7 @@
     "dateformat": "^3.0.2",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "forever": "^0.15.3",
     "jade": "~1.11.0",
     "mongoose": "^4.13.2",
     "morgan": "~1.9.0",

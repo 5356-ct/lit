@@ -2,6 +2,15 @@ Circle CI Status: [![CircleCI](https://circleci.com/gh/5356-ct/lit.svg?style=svg
 
 # Documentation
 
+#### Documentation Generation
+
+In project's root directory, run
+
+```
+yarn apidoc
+yarn opendocs
+```
+
 #### Dependencies
 
 * MySQL (you can install this with `brew install mysql`
@@ -96,5 +105,6 @@ the inspiration to this, and some handy implementation hints, came.
  * [CodeMirror](http://codemirror.net/) for the awesome syntax-highlighted editor
  * [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) for syntax highlighting in output code blocks
  * [js-deflate](https://github.com/dankogai/js-deflate) for gzipping of data to make it fit in URLs
+
 
 

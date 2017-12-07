@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   // And insert something like this instead:
   res.json([{
   	id: 1,
-  	username: "samsepi0l"
+  	username: "foochanged1"
   }, {
   	id: 2,
   	username: "D0loresH4ze"

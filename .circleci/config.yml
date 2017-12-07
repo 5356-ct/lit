@@ -44,6 +44,26 @@ jobs:
       - run:
           name: Install some stuff
           command: echo "deploy deploy deploy!"
+      - run: curl -o $HOME/google_appengine_1.9.30.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip
+      - run: unzip -q -d $HOME $HOME/google_appengine_1.9.30.zip
+      # Retrieve our secrets from the CircleCI environment
+      - run: echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
+      - run: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+      - run: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/client-secret.json
+      # - sed  s/YOUR-API-KEY/$API_KEY/ api_key.py.sample > api_key.py
+      # vendor our dependencies
+      - run: mkdir -p lib
+      - run: curl -o $HOME/google-cloud-sdk.tgz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-182.0.0-linux-x86_64.tar.gz
+      - run: tar -zxvf $HOME/google-cloud-sdk.tgz
+      - run: google-cloud-sdk/bin/gcloud --quiet components update
+      - run: google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run: google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
+      - run: yarn install
+      - run: git clone https://github.com/5356-ct/lit.git
+      - run: pwd
+      - run: ls $HOME/repo/lit/
+      - run: google-cloud-sdk/bin/gcloud app deploy $HOME/repo/lit/app.yaml
+
 
 workflows:
   version: 2

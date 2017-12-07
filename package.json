@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "scripts/test"
+    "test": "mocha --timeout 10000",
+    "apidoc": "apidoc -i routes/ -o apidoc/",
+    "opendocs": "cd apidoc && open index.html"
   },
   "dependencies": {
+    "apidoc": "^0.17.6",
+    "autoprefixer": "^7.2.1",
     "axios": "^0.17.1",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
@@ -32,6 +36,9 @@
     "yarn": "^1.3.2"
   },
   "devDependencies": {
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
   }
 }

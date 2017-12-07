@@ -184,7 +184,7 @@ router.get('/phone_number/:phone_number/code/:code/jobs', function(req, res, nex
           if (err) {
             res.json(err);
           } else {
-            rows.push({type:'hauler'});
+            // rows.push({type:'hauler'});
             res.json(rows);
           }
         });
@@ -226,7 +226,7 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
           if (err) {
             res.json(err);
           } else {
-            rows.push({type:'hauler'});
+            // rows.push({type:'hauler'});
             res.json(rows);
           }
         });
@@ -269,7 +269,7 @@ router.get('/phone_number/:phone_number/code/:code/job/:job_id/accept', function
           if (err) {
             res.json(err);
           } else {
-            rows.push({type:'hauler'});
+            // rows.push({type:'hauler'});
             res.json(rows);
           }
         });
@@ -312,7 +312,7 @@ router.get('/phone_number/:phone_number/code/:code/job/:job_id/finish', function
           if (err) {
             res.json(err);
           } else {
-            rows.push({type:'hauler'});
+            // rows.push({type:'hauler'});
             res.json(rows);
           }
         });

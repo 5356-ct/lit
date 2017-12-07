@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=3001 node ./bin/www",
+    "start": "PORT=3001 forever start ./bin/www",
     "test": "mocha --timeout 10000",
     "apidoc": "apidoc -i routes/ -o apidoc/",
     "opendocs": "cd apidoc && open index.html"

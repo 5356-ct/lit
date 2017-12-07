@@ -2,14 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-
-
 version: 2
-deployment:
-  production:
-    pre:
-      - pyenv global 2.7.12
-
 machine:
   environment:
     # Add app engine sdk to pythonpath for local unit tests.
@@ -18,75 +11,70 @@ machine:
     # Replace this with your project ID
     GCLOUD_PROJECT: "advstsys-lit"
 
-dependencies:
-  pre:
-    # Download App Engine SDK
-    # This is not necessary to deploy, its only necessary  to run local tests importing the App Engine SDK
-    - curl -o $HOME/google_appengine_1.9.30.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip
-    - unzip -q -d $HOME $HOME/google_appengine_1.9.30.zip
-    # Retrieve our secrets from the CircleCI environment
-    - echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
-    - sed  s/YOUR-API-KEY/$API_KEY/ api_key.py.sample > api_key.py
-    # vendor our dependencies
-    - mkdir -p lib
-    - pip install -r requirements.txt -t lib
-    # Make sure gcloud is up to date
-    - gcloud --quiet components update app
-    # authenticate gcloud
-    - gcloud auth activate-service-account --key-file ${HOME}/client-secret.json
-    # Replace <your-project-id>
-    - gcloud config set project $GCLOUD_PROJECT
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
 
-test:
-  override:
-    # run local unit tests
-    - python test_main.py
+    working_directory: ~/repo
 
-deployment:
-    staging:
+    steps:
+      - checkout
+
+      - run: echo "hello world"
+      # - run: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+      # - run: sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
+      # - run: sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      # - run: sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      # run tests!
+      - run: yarn test
+
+  deployment:
+    production:
+        pre:
+          - pyenv global 2.7.12
+          # Download App Engine SDK
+          # This is not necessary to deploy, its only necessary  to run local tests importing the App Engine SDK
+          - curl -o $HOME/google_appengine_1.9.30.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip
+          - unzip -q -d $HOME $HOME/google_appengine_1.9.30.zip
+          # Retrieve our secrets from the CircleCI environment
+          - echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
+          - sed  s/YOUR-API-KEY/$API_KEY/ api_key.py.sample > api_key.py
+          # vendor our dependencies
+          - mkdir -p lib
+          - pip install -r requirements.txt -t lib
+          # Make sure gcloud is up to date
+          - gcloud --quiet components update app
+          # authenticate gcloud
+          - gcloud auth activate-service-account --key-file ${HOME}/client-secret.json
+          # Replace <your-project-id>
+          - gcloud config set project $GCLOUD_PROJECT
+
         branch: master
         commands:
         # deploy to AppEngine
         - gcloud -q preview app deploy app.yaml --promote --version=1
         # Run our E2E Test
         - python e2e_test.py
-
-# jobs:
-#   build:
-#     docker:
-#       # specify the version you desire here
-#       - image: circleci/node:7.10
-      
-#       # Specify service dependencies here if necessary
-#       # CircleCI maintains a library of pre-built images
-#       # documented at https://circleci.com/docs/2.0/circleci-images/
-#       # - image: circleci/mongo:3.4.4
-
-#     working_directory: ~/repo
-
-#     steps:
-#       - checkout
-
-#       - run: echo "hello world"
-#       # - run: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
-#       # - run: sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
-#       # - run: sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-#       # - run: sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
-
-#       # Download and cache dependencies
-#       - restore_cache:
-#           keys:
-#           - v1-dependencies-{{ checksum "package.json" }}
-#           # fallback to using the latest cache if no exact match is found
-#           - v1-dependencies-
-
-#       - run: yarn install
-
-#       - save_cache:
-#           paths:
-#             - node_modules
-#           key: v1-dependencies-{{ checksum "package.json" }}
-        
-#       # run tests!
-#       - run: yarn test
 

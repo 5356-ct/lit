@@ -35,7 +35,7 @@ class enterCode extends Component {
                     this.goToOrderForm()
                 }}>
                     <div>
-                        <input id='code' className='form-control input-xs' type="text" name='code' minlength='4' maxlength='4' placeholder="Enter Code" />
+                        <input id='code' className='form-control input-xs' type="text" name='code' minLength='4' maxLength='4' placeholder="Enter Code" />
                     </div>
                     <div>
                         <button id='joinButton' className='btn btn-primary btn-xs'  type="submit">Join</button>

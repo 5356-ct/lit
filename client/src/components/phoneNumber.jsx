@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import axios from 'axios'
 import enterCode from "./enterCode"
-import { isAbsolute } from 'path';
 
 class phoneNumber extends Component {
     constructor(props) {
@@ -70,7 +69,7 @@ class phoneNumber extends Component {
                     this.goToEnterCode()
                 }}>
                     <div>
-                        <input name='phoneNumber' id='phoneNumber' className='form-control input-xs' type="text" minlength='10' maxlength='10' placeholder="Enter Phone Number" />
+                        <input name='phoneNumber' id='phoneNumber' className='form-control input-xs' type="text" minLength='10' maxLength='10' placeholder="Enter Phone Number" />
                     </div>
                     <div>
                         <button className="waves-effect btn btn-small green darken-2" id='sendCode'  type="submit">Send Code</button>

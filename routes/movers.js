@@ -7,10 +7,11 @@ var Hauler = require('../models/haulers');
 
 /* Helpers */
 function gen_twilio_code(code, phone_number) {
-  var accountSid = process.env.ACCOUNTSID;
-  var authToken = process.env.AUTHTOKEN;
+  var accountSid = process.env.ACCOUNTSID || 'AC4fae2703f97f79af69b9d4ebdd91d2ab';
+  var authToken = process.env.AUTHTOKEN || '2101a4d0cf6eda17790c4bb2f6e949b8';
   console.log('accountSid: ' + accountSid);
   console.log('authToken: ' + authToken);
+
 
   // require the Twilio module and create a REST client
   const client = require('twilio')(accountSid, authToken);

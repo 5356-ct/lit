@@ -60,6 +60,7 @@ jobs:
       - run: google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
       - run: yarn install
       - run: git clone https://github.com/5356-ct/lit.git
+      - run: pwd
       - run: ls $HOME/lit/
       - run: google-cloud-sdk/bin/gcloud app deploy $HOME/lit/app.yaml
 

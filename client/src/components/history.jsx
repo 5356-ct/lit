@@ -50,7 +50,7 @@ class history extends Component{
                       </div>
       
                       <div className="narrow">
-                        <img id = "profile_image" src="https://raw.githubusercontent.com/5356-ct/lit/master/client/public/images/profile.jpg" />
+                        <img id = "profile_image" src="https://raw.githubusercontent.com/5356-ct/lit/master/client/public/images/house1.jpg" />
                       </div>
                     </div>
                   </div>
@@ -63,7 +63,7 @@ class history extends Component{
                         <p>$ 150</p>
                       </div>
                       <div className="narrow" onClick={ evt => this.goToGotHauler(evt)}>
-                        <p className ="job_accept">Accept</p>
+                        <img id = "profile_image" src="https://raw.githubusercontent.com/5356-ct/lit/master/client/public/images/house2.jpg" />
                       </div>
                     </div>
                   </div>
@@ -76,7 +76,7 @@ class history extends Component{
                         <p>$ 200</p>
                       </div>
                       <div className="narrow" onClick={ evt => this.goToGotHauler(evt)}>
-                        <p className ="job_accept">Accept</p>
+                         <img id = "profile_image" src="https://raw.githubusercontent.com/5356-ct/lit/master/client/public/images/house3.jpg" />
                       </div>
                     </div>
                   </div>
@@ -89,7 +89,7 @@ class history extends Component{
                         <p>$ 450</p>
                       </div>
                       <div className="narrow" onClick={ evt => this.goToGotHauler(evt)}>
-                        <p className ="job_accept">Accept</p>
+                        <img id = "profile_image" src="https://raw.githubusercontent.com/5356-ct/lit/master/client/public/images/house4.jpg" />
                       </div>
                     </div>
                   </div>

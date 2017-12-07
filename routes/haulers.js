@@ -13,7 +13,10 @@ function gen_twilio_code(code, phone_number) {
 
   // require the Twilio module and create a REST client
   const client = require('twilio')(accountSid, authToken);
-  if (phone_number.length === 9) {
+  console.log(phone_number);
+  phone_number = phone_number + '';
+  if (phone_number.length === 10) {
+
     phone_number = "1" + phone_number;
     client.messages
       .create({
@@ -89,8 +92,9 @@ router.get('/phone_number/:phone_number/code', function(req, res, next) {
   var phone_number = req.params.phone_number;
 
   // Twilio Credentials
-  // gen_twilio_code(phone_number);
   var code = Math.floor(1000 + Math.random() * 9000);
+  gen_twilio_code(code, phone_number);
+  
 
   // check if the phone number exists
   console.log('Generated code', code);

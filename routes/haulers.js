@@ -31,14 +31,18 @@ function gen_twilio_code(code, phone_number) {
   }
 }
 
-/* 
+ // * For a hauler, given a phone number check if that number is in the database.
+ // * If the number is not in the database, insert it
 
-  GET
-
-  For a hauler, given a phone number check if that number is in the database.
-  If the number is not in the database, insert it
-
-*/
+/**
+ * @api {get} /phone_number/:phone_number Save Hauler's phone number
+ * @apiName Save phone number
+ * @apiGroup Hauler
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ *
+ * @apiSuccess {booean} success Success condition of the request.
+ */
 router.get('/phone_number/:phone_number', function(req, res, next) {
   // Comment out this line:
   //res.send('respond with a resource');
@@ -71,6 +75,15 @@ router.get('/phone_number/:phone_number', function(req, res, next) {
   });
 });
 
+/**
+ * @api {get} /phone_number/:phone_number/code Send code to Hauler's phone number
+ * @apiName Send code
+ * @apiGroup Hauler
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ *
+ * @apiSuccess {Number} phone_number users phone number.
+ */
 /* GET generate a code and send it to the user's phone given by the phone number. */
 router.get('/phone_number/:phone_number/code', function(req, res, next) {
   var phone_number = req.params.phone_number;
@@ -123,6 +136,17 @@ function authenticate(phone_number, code) {
   return false;
 }
 
+
+/**
+ * @api {get} /phone_number/:phone_number/code/:code Authenticate a user
+ * @apiName authenticate user
+ * @apiGroup Hauler
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ *
+ * @apiSuccess {string} success success message.
+ */
 /* GET 
 check if the phone number matches
 if so, return true
@@ -156,12 +180,19 @@ router.get('/phone_number/:phone_number/code/:code', function(req, res, next) {
   });
 });
 
+/**
+ * @api {get} /phone_number/:phone_number/code/:code/jobs List available jobs
+ * @apiName List of available jobs
+ * @apiGroup Hauler
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ *
+ * @apiSuccess {array} rows array of jobs objects in json.
+ */
 /* 
-
   GET
-
   A list of available jobs that the hauler can look at
-
  */
 router.get('/phone_number/:phone_number/code/:code/jobs', function(req, res, next) {
   var phone_number = req.params.phone_number;
@@ -198,12 +229,19 @@ router.get('/phone_number/:phone_number/code/:code/jobs', function(req, res, nex
   });
 });
 
+/**
+ * @api {get} /phone_number/:phone_number/code/:code/job Current active job
+ * @apiName Current job
+ * @apiGroup Hauler
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ *
+ * @apiSuccess {array} rows array of jobs objects in json.
+ */
 /* 
-
   GET
-
   The current job the hauler is on
-
  */
 router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next) {
   var phone_number = req.params.phone_number;
@@ -240,12 +278,20 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
   });
 });
 
+/**
+ * @api {get} /phone_number/:phone_number/code/:code/job/:job_id/accept Accept a job
+ * @apiName accept job
+ * @apiGroup Hauler
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ * @apiParam {Integer} job_id job id.
+ *
+ * @apiSuccess {array} status some status message.
+ */
 /* 
-
   GET
-
   Accept the job given a job id
-
  */
 router.get('/phone_number/:phone_number/code/:code/job/:job_id/accept', function(req, res, next) {
   var phone_number = req.params.phone_number;
@@ -283,6 +329,17 @@ router.get('/phone_number/:phone_number/code/:code/job/:job_id/accept', function
   });
 });
 
+/**
+ * @api {get} /phone_number/:phone_number/code/:code/job/:job_id/finish Finish a job
+ * @apiName finish job
+ * @apiGroup Hauler
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ * @apiParam {Integer} job_id job id.
+ *
+ * @apiSuccess {array} status some status message.
+ */
 /* 
 
   GET

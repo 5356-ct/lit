@@ -32,6 +32,16 @@ function gen_twilio_code(code, phone_number) {
   }
 }
 
+
+/**
+ * @api {get} /phone_number/:phone_number Save Mover's phone number
+ * @apiName Save phone number
+ * @apiGroup Mover
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ *
+ * @apiSuccess {booean} success Success condition of the request.
+ */
 /* 
 
   GET
@@ -85,6 +95,15 @@ router.get('/phone_number/:phone_number', function(req, res, next) {
   // });
 });
 
+/**
+ * @api {get} /phone_number/:phone_number/code Send code to Mover's phone number
+ * @apiName Send code
+ * @apiGroup Mover
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ *
+ * @apiSuccess {Number} phone_number users phone number.
+ */
 /* GET generate a code and send it to the user's phone given by the phone number. */
 router.get('/phone_number/:phone_number/code', function(req, res, next) {
   var phone_number = req.params.phone_number;
@@ -148,6 +167,17 @@ function authenticate(phone_number, code) {
   return false;
 }
 
+/**
+ * @api {get} /phone_number/:phone_number/code/:code Authenticate a user
+ * @apiName authenticate user
+ * @apiGroup Mover
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ *
+ * @apiSuccess {string} success success message.
+ */
+
 /* GET 
 
 check if the phone number matches
@@ -185,6 +215,23 @@ router.get('/phone_number/:phone_number/code/:code', function(req, res, next) {
     }
   });
 });
+
+
+/**
+ * @api {post} /phone_number/:phone_number/code/:code/job Submit a job
+ * @apiName Submit a job
+ * @apiGroup Mover
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ * @apiParam {Integer} number of rooms.
+ * @apiParam {Datetime} job start time
+ * @apiParam {Datetime} job end time
+ * @apiParam {Number} max price
+ * @apiParam {string} description of job
+ *
+ * @apiSuccess {array} the job that was submitted successfully.
+ */
 
 /* 
 
@@ -251,7 +298,7 @@ router.post('/phone_number/:phone_number/code/:code/job', function(req, res, nex
               if (err) {
                 res.json(err);            
               } else {
-                res.json([job, {type:'hauler'}]);
+                res.json([job, {type:'mover'}]);
               }
             });
           }
@@ -267,13 +314,20 @@ router.post('/phone_number/:phone_number/code/:code/job', function(req, res, nex
   });
 });
 
+/**
+ * @api {get} /phone_number/:phone_number/code/:code/job Current active job
+ * @apiName Active Job
+ * @apiGroup Mover
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ *
+ * @apiSuccess {array} rows array of jobs objects in json.
+ */
 /* 
   GET
-
   Fetch the current active job that the mover has requested.
-
   You can see the status of the job via this endpoint
-
 */
 router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next) {
   var phone_number = req.params.phone_number;
@@ -337,9 +391,19 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
 
 });
 
+
+/**
+ * @api {get} /phone_number/:phone_number/code/:code/jobs List requested jobs
+ * @apiName Requested jobs
+ * @apiGroup Mover
+ * 
+ * @apiParam {Integer} phone_number 10 digit phone number.
+ * @apiParam {Integer} code 4 digit code.
+ *
+ * @apiSuccess {array} rows array of jobs objects in json.
+ */
 /* 
   GET 
-
   Fetch all jobs that the mover has requested
 */
 router.get('/phone_number/:phone_number/code/:code/jobs', function(req, res, next) {

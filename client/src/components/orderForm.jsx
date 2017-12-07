@@ -12,8 +12,9 @@ class orderForm extends Component{
         this.finish_by = ''
         this.max_price = ''
         this.textareaChars = ''
-        this.phoneNumber = window.location.search.split("=")[1].split("?")[0];
-        this.code = window.location.search.split("=")[2].split("/")[0];         
+        this.phoneNumber = window.location.search.split("=")[1].split("?")[0]; 
+        this.isAMover = window.location.search.split("=")[2];
+        this.code = window.location.search.split("=")[3].slice(0,-1);        
         this.goToGotHauler = this.goToGotHauler.bind(this)
       }
 
@@ -32,8 +33,7 @@ class orderForm extends Component{
                 console.log(error)
             })     
         
-        
-        this.props.history.push(`/confirmMover?phone=${this.phoneNumber}?code=${this.code}/`)
+        this.props.history.push(`/confirmMover?phone=${this.phoneNumber}?isAMover=${this.isAMover}?code=${this.code}/`)
     }
 
     // componentWillMount() {
@@ -61,8 +61,7 @@ class orderForm extends Component{
                 <section id = "inner_nav">
                 <div className="tab">
                     <ul className="tabs">
-                    <li><a href="#">MOVING</a></li>
-                    <li><Link to="/newJobsHauler">JUNK HAULING</Link></li>
+                    <h1>Request to Move!</h1>
                     </ul> 
                     <div className="tab_content">
         
@@ -97,7 +96,7 @@ class orderForm extends Component{
             
                             <p>Describe your Job</p>
                             <p id ="example_text">e.g. Moving' on Up!</p>
-                                <textarea id="textareaChars" name="textareaChars" maxlength="100"></textarea>
+                                <textarea id="textareaChars" name="textareaChars" maxLength="100"></textarea>
                                 <span id="chars">100</span>/120
                             </div>
 

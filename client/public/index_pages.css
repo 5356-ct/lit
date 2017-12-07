@@ -6,6 +6,13 @@ body {
   background-color: #eff2f8;
 }
 
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
 .parent {
   display: flex;
   padding: 15px;
@@ -243,6 +250,24 @@ p#example_text {
     color: #b1b2b5;
 }
 
+.firstButton {
+  padding: 10px 10px;
+  border-radius: 10px;
+  background-color: #3636ad; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 10px 2px;
+  cursor: pointer;
+  position: absolute;
+  top: 140%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-60%, -40%)
+}
 
 .button {
     background-color: #4CAF50; /* Green */

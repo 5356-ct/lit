@@ -22,13 +22,13 @@ class phoneNumber extends Component {
             this.setState({ didNotChooseStatus: true})
     }
 
-    toggleStatusAndSetHauler(event){
+    toggleStatusAndMover(event){
         event.preventDefault()
         this.state.didNotChooseStatus ?
             this.setState({ didNotChooseStatus: false}) :
             this.setState({ didNotChooseStatus: true})
         
-        this.setState({ isAMover: false })
+        this.setState({isAMover: false})
     }
     
     goToEnterCode() {
@@ -37,13 +37,12 @@ class phoneNumber extends Component {
       : 
       axios.get(`/api/v1/haulers/phone_number/${this.state.phoneNumber}`)
       
-      {<enterCode isAMover={this.state.isAMover} />}
-      this.props.history.push(`/samplePhoneNumber?phone=${this.state.phoneNumber}`)
+      this.props.history.push(`/samplePhoneNumber?phone=${this.state.phoneNumber}?isAMover=${this.state.isAMover}`)
     }
   
     render() {
         return(
-            <div className="col-xs-12 col-md-3 input-xs">
+            <div className="center col-xs-12 col-md-3 input-xs">
                 {
                     this.state.didNotChooseStatus ? 
                     <div id = "Status_Button">
@@ -55,7 +54,7 @@ class phoneNumber extends Component {
                         </button>
 
                         <button 
-                        onClick={ evt => this.toggleStatusAndSetHauler(evt)}
+                        onClick={ evt => this.toggleStatusAndMover(evt)}
                         className="button button5" 
                         >
                         Hauler
@@ -72,7 +71,7 @@ class phoneNumber extends Component {
                         <input name='phoneNumber' id='phoneNumber' className='form-control input-xs' type="text" minLength='10' maxLength='10' placeholder="Enter Phone Number" />
                     </div>
                     <div>
-                        <button className="waves-effect btn btn-small green darken-2" id='sendCode'  type="submit">Send Code</button>
+                        <button className="firstButton" id='sendCode'  type="submit">Send Code</button>
                     </div>
                 </form>
                 }

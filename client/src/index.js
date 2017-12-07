@@ -14,6 +14,8 @@ import enterCode from './components/enterCode';
 import orderForm from './components/orderForm';
 import confirmMover from './components/confirmMover';
 import newJobsHauler from './components/newJobsHauler';
+import history from './components/history';
+import currentJob from './components/currentJob';
 
 
 render(
@@ -25,6 +27,8 @@ render(
                 <Route path="/orderForm" component={orderForm} />
                 <Route path="/confirmMover" component={confirmMover} />
                 <Route path="/newJobsHauler" component={newJobsHauler} />
+                <Route path="/history" component={history} />
+                <Route path="/currentJob" component={currentJob} />
             </div>
         </BrowserRouter>
     </Provider>,

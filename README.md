@@ -98,3 +98,4 @@ the inspiration to this, and some handy implementation hints, came.
  * [js-deflate](https://github.com/dankogai/js-deflate) for gzipping of data to make it fit in URLs
 
 
+

@@ -73,8 +73,8 @@ jobs:
 
         branch: master
         commands:
-        # deploy to AppEngine
-        - gcloud -q preview app deploy app.yaml --promote --version=1
-        # Run our E2E Test
-        - python e2e_test.py
+          # deploy to AppEngine
+          - gcloud -q preview app deploy app.yaml --promote --version=1
+          # Run our E2E Test
+          - python e2e_test.py
 

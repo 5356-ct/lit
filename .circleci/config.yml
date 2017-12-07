@@ -53,9 +53,9 @@ jobs:
       # - sed  s/YOUR-API-KEY/$API_KEY/ api_key.py.sample > api_key.py
       # vendor our dependencies
       - run: mkdir -p lib
-      - run: sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
-      - run: sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-      - run: sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
+      - run: gcloud --quiet components update
+      - run: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run: gcloud config set project $GCLOUD_PROJECT
 
 workflows:
   version: 2

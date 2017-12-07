@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 1
+version: 2
 jobs:
   build:
     docker:
@@ -25,8 +25,21 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
+      - run: echo "foo bar"
       - run: yarn install
+      - run: curl -o $HOME/google_appengine_1.9.30.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip
+      - run: unzip -q -d $HOME $HOME/google_appengine_1.9.30.zip
+      - run: echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
+      - run: sed  s/YOUR-API-KEY/$API_KEY/ api_key.py.sample > api_key.py
+      # vendor our dependencies
+      - run: mkdir -p lib
+      - run: pip install -r requirements.txt -t lib
+      # Make sure gcloud is up to date
+      - run: gcloud --quiet components update app
+      # authenticate gcloud
+      - run: gcloud auth activate-service-account --key-file ${HOME}/client-secret.json
+      # Replace <your-project-id>
+      - run: gcloud config set project $GCLOUD_PROJECT
 
       - save_cache:
           paths:
@@ -35,3 +48,4 @@ jobs:
         
       # run tests!
       - run: yarn test
+      - 

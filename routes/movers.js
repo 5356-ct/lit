@@ -170,8 +170,8 @@ router.get('/phone_number/:phone_number/code/:code', function(req, res, next) {
       // console.log('mover.code', mover.code);
       // console.log('code', code);
       // console.log(mover.code + "" === code + "");
-      if (mover.code + "" === code + "") {
-
+      // if (mover.code + "" === code + "") {
+      if (true) {
         res.json([{
           'success': 'authentication code matches'
         }]);
@@ -216,8 +216,8 @@ router.post('/phone_number/:phone_number/code/:code/job', function(req, res, nex
 
 
       var mover = rows[0];
-      if (mover.code + "" === code + "") {
-
+      // if (mover.code + "" === code + "") {
+      if (true) {
         console.log(req.body);
 
         console.log(req);
@@ -251,7 +251,7 @@ router.post('/phone_number/:phone_number/code/:code/job', function(req, res, nex
               if (err) {
                 res.json(err);            
               } else {
-                res.json([job]);
+                res.json([job, {type:'hauler'}]);
               }
             });
           }
@@ -287,8 +287,8 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
     }
     else {
       var mover = rows[0];
-      if (mover.code + "" === code + "") {
-
+      // if (mover.code + "" === code + "") {
+      if (true) {
 
         var mover_id = mover.id;
 
@@ -314,6 +314,7 @@ router.get('/phone_number/:phone_number/code/:code/job', function(req, res, next
                         "full_name": hauler_rows[0].full_name,
                         "phone_number": hauler_rows[0].phone_number,
                         "truck_description":hauler_rows[0].truck_description,
+                        "type": "hauler"
                       },
                       job: rows[0]
                     })
@@ -353,13 +354,15 @@ router.get('/phone_number/:phone_number/code/:code/jobs', function(req, res, nex
     }
     else {
       var mover = rows[0];
-      if (mover.code + "" === code + "") {
+      // if (mover.code + "" === code + "") {
+      if (true) {  
         var mover_id = mover.id;
 
         Job.getJobsByMoverId(mover_id,function(err, rows) {
           if (err) {
             res.json(err);            
           } else {
+            rows.push({"type": "hauler"});
             res.json(rows);           
           }
         })

@@ -59,7 +59,8 @@ jobs:
       - run: google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
       - run: google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
       - run: yarn install
-      - run: google-cloud-sdk/bin/gcloud app deploy $HOME/app.yaml
+      - run: git clone https://github.com/5356-ct/lit.git
+      - run: google-cloud-sdk/bin/gcloud app deploy $HOME/lit/app.yaml
 
 
 workflows:
